@@ -31,3 +31,13 @@ Thumbs.db
 *.log
 *.csv
 backend.zip
+
+# --- Strategy folder rules ---
+!strategy/
+strategy/__pycache__/
+strategy/*.log
+strategy/*.csv
+strategy/*.json
+strategy/*.pkl
+strategy/data/
+
