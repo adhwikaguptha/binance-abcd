@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "C:/Users/Admin/Tradebot"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
