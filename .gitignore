@@ -41,3 +41,13 @@ strategy/*.json
 strategy/*.pkl
 strategy/data/
 
+# --- Ignore virtual environments everywhere ---
+venv/
+.venv/
+*/venv/
+*/.venv/
+strategy/venv/
+backend/venv/
+frontend/venv/
+
+
