@@ -143,9 +143,10 @@ python run_stage2.py
 
 ## 🏁 Authors
 
-** * Sri Karthik Reddy**
-** * Adhwika**
-** * Shivani**
+* Sri Karthik Reddy
+* Adhwika
+* Shivani
+  
 
 ---
 
