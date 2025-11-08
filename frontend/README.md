@@ -1,164 +1,180 @@
- Automated Trading & Risk Management Dashboard
 
-A full-stack trading analytics and control system designed to monitor signals, analyze positions, update risk settings, and visualize Profit & Loss — with **React.js (Frontend)** and **FastAPI (Backend)** integration.
+# 🚀 Automated Trading & Risk Management Dashboard
 
-This system is built to support real-time decision making for semi-automated or automated trading strategies, with secure authentication, modular UI components, and clean API communication.
+A full-stack trading analytics and control system designed to monitor signals, analyze positions, update risk settings, and visualize Profit & Loss — built using **React.js (Frontend)** and **FastAPI (Backend)**.
 
----
-
- Features
-
-| Feature | Description |
-|--------|-------------|
-|  User Authentication | Secure Login & Register with JWT |
-|  Dashboard Overview | Unified access to all system modules |
-| Signal Management | View, Approve, Reject trading signals |
-| Orders & Positions | Track live and closed trades easily |
-| PnL Visualization | Real-time Profit & Loss chart with Recharts |
-| Risk Control Module | Update capital, risk %, max loss dynamically |
-| Backend Health Check | System availability & API connectivity |
-| Modular Architecture | Easy to maintain, extend and deploy |
+This system supports **semi-automated trading workflows**, offering real-time decision support, authentication, and intuitive visualization of market data and strategy performance.
 
 ---
 
- Technology Stack
+## ✨ Features
 
-| Layer | Technology |
-|------|------------|
-| Frontend | **React.js**, React Router, Axios, Recharts, Context API |
-| Backend | **FastAPI**, Python, SQLAlchemy, Pydantic |
-| Database | PostgreSQL |
-| Auth | JWT (Bearer Token) |
-| Deployment (optional) | Docker / Render / Railway / Vercel |
+| Feature                     | Description                                        |
+| --------------------------- | -------------------------------------------------- |
+| 🔐 **User Authentication**  | Secure Login & Register using JWT tokens           |
+| 📊 **Dashboard Overview**   | Unified access to all trading modules              |
+| 🚦 **Signal Management**    | View, Approve, or Reject generated trading signals |
+| 🧾 **Orders & Positions**   | Monitor open and closed trades easily              |
+| 📈 **PnL Visualization**    | Real-time Profit & Loss graph using Recharts       |
+| ⚙️ **Risk Control Module**  | Adjust capital, risk %, and max loss dynamically   |
+| 🔍 **Backend Health Check** | Displays API connectivity and server status        |
+| 🧩 **Modular Architecture** | Clean structure, scalable and maintainable         |
 
 ---
 
-##  Project Structure
+## 🏗 Technology Stack
 
+| Layer                 | Technology                                               |
+| --------------------- | -------------------------------------------------------- |
+| Frontend              | **React.js**, React Router, Axios, Recharts, Context API |
+| Backend               | **FastAPI**, Python, SQLAlchemy, Pydantic                |
+| Database              | PostgreSQL                                               |
+| Auth                  | JWT (Bearer Token)                                       |
+| Deployment (optional) | Docker / Render / Railway / Vercel                       |
+
+---
+
+## 📂 Project Structure
+
+```
 frontend/
 │
-├── .env # Contains REACT_APP_API_URL
+├── .env                         # Environment variables (API base URL)
 ├── package.json
 ├── public/
-│ └── index.html
+│   └── index.html
 └── src/
-├── api/ # API Request Handlers
-│ ├── auth.js
-│ ├── signals.js
-│ ├── orders.js
-│ ├── positions.js
-│ ├── pnl.js
-│ ├── risk.js
-│ └── trade.js
-│
-├── context/
-│ └── AuthContext.js # Global Auth State (JWT)
-│
-├── components/
-│ ├── Sidebar.js
-│ ├── Header.js
-│ ├── ProtectedRoute.js
-│ ├── Toast.js
-│ └── LoadingSpinner.js
-│
-├── pages/
-│ ├── Login.js
-│ ├── Register.js
-│ ├── Dashboard.js
-│ ├── Signals.js
-│ ├── Orders.js
-│ ├── Positions.js
-│ ├── PnL.js
-│ ├── Risk.js
-│ ├── BinanceTest.js
-│ └── Health.js
-│
-└── App.js # Routes + Layout Structure
-
-yaml
-Copy code
+    ├── api/                     # API Request Handlers
+    │   ├── auth.js
+    │   ├── signals.js
+    │   ├── orders.js
+    │   ├── positions.js
+    │   ├── pnl.js
+    │   ├── risk.js
+    │   └── trade.js
+    │
+    ├── context/
+    │   └── AuthContext.js       # Global Auth State (JWT)
+    │
+    ├── components/
+    │   ├── Sidebar.js
+    │   ├── Header.js
+    │   ├── ProtectedRoute.js
+    │   ├── Toast.js
+    │   └── LoadingSpinner.js
+    │
+    ├── pages/
+    │   ├── Login.js
+    │   ├── Register.js
+    │   ├── Dashboard.js
+    │   ├── Signals.js
+    │   ├── Orders.js
+    │   ├── Positions.js
+    │   ├── PnL.js
+    │   ├── Risk.js
+    │   ├── BinanceTest.js
+    │   └── Health.js
+    │
+    └── App.js                   # Routes + Layout Structure
+```
 
 ---
 
-## Installation & Setup
+## ⚙️ Installation & Setup
 
-### Clone the Repository
+### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>/frontend
- Install Dependencies
-bash
-Copy code
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
 npm install
- Configure Environment Variables
-Create .env in the frontend folder:
+```
 
-ini
-Copy code
+### 3️⃣ Configure Environment Variables
+
+Create a `.env` file inside the **frontend** folder:
+
+```
 REACT_APP_API_URL=http://127.0.0.1:8000
-Make sure backend is running at this URL.
+```
 
- Start the Frontend
-bash
-Copy code
+> Ensure the backend FastAPI server runs at the same URL.
+
+### 4️⃣ Start the Frontend
+
+```bash
 npm start
-The app runs on:
+```
 
-arduino
-Copy code
+Your app will be available at:
+
+```
 http://localhost:3000/
- Backend API Requirements
-The frontend expects the backend to expose the following routes:
+```
 
-Endpoint	Method	Description
-/auth/login	POST	Login and get token
-/auth/register	POST	Register account
-/signals	GET	Get all signals
-/signals/pending	GET	Get pending signals
-/signals/{id}/approve	POST	Approve signal
-/signals/{id}/reject	POST	Reject signal
-/orders	GET	Get orders
-/positions	GET	Get open positions
-/pnl/today	GET	PnL for current day
-/pnl/summary	GET	Overall performance summary
-/risk/update	PUT	Update risk parameters
-/health/	GET	Check backend status
+---
 
- UI Highlights
-Animated Login & Register screens
+## 🔗 Backend API Requirements
 
-Collapsible Sidebar with smooth slide transition
+The frontend communicates with the following backend endpoints:
 
-Global Toast notification system for feedback
+| Endpoint                | Method | Description                    |
+| ----------------------- | ------ | ------------------------------ |
+| `/auth/login`           | POST   | Authenticate and get JWT token |
+| `/auth/register`        | POST   | Register new account           |
+| `/signals`              | GET    | Fetch all trade signals        |
+| `/signals/pending`      | GET    | Fetch pending approval signals |
+| `/signals/{id}/approve` | POST   | Approve a signal               |
+| `/signals/{id}/reject`  | POST   | Reject a signal                |
+| `/orders`               | GET    | Get list of orders             |
+| `/positions`            | GET    | Get current open positions     |
+| `/pnl/today`            | GET    | Get today’s Profit & Loss      |
+| `/pnl/summary`          | GET    | Get performance summary        |
+| `/risk/update`          | PUT    | Update risk parameters         |
+| `/health/`              | GET    | Check backend system status    |
 
-Loading indicators during API calls
+---
 
-Fully responsive layout
+## 🎨 UI Highlights
 
- Testing Summary
-Test Case	Result
-Login with valid credentials	 Successful
-Invalid login	 Error shown
-Navigate without token	 Redirect to Login
-Update risk settings	 Updated successfully
-Load PnL Chart	Smooth dynamic rendering
+* Smooth transitions & responsive design
+* Collapsible sidebar with active state tracking
+* Real-time toast notifications for feedback
+* Loading indicators for API calls
+* Clean dashboard layout with intuitive navigation
 
- Future Enhancements
-WebSocket-based live updates
+---
 
-Role-based admin dashboard
+## 🧪 Testing Summary
 
-Trade execution directly from UI
+| Test Case                    | Result                       |
+| ---------------------------- | ---------------------------- |
+| Login with valid credentials | ✅ Success                    |
+| Invalid login                | ✅ Proper error handling      |
+| Unauthorized navigation      | ✅ Redirects to Login         |
+| Update risk settings         | ✅ Updated correctly          |
+| Load PnL Chart               | ✅ Dynamic rendering verified |
 
-Automated trading strategy builder UI
+---
 
-Dark/Light theme toggle
+## 🚀 Future Enhancements
 
- Conclusion
-This project demonstrates a modern, scalable and interactive trading dashboard built with React + FastAPI, providing real-time monitoring, risk control, and analysis features suitable for both educational and production use.
+* WebSocket-based live updates
+* Role-based admin dashboard
+* Trade execution directly from UI
+* Automated strategy builder interface
+* Dark/Light theme toggle
 
- Show Your Support
-If you found this project useful, please star the repository 
-It helps others discover it and keeps the project growing!
+---
 
+## 🏁 Conclusion
+
+This project delivers a **scalable, interactive, and visually clean trading dashboard** powered by **React + FastAPI**, enabling real-time performance tracking, signal control, and risk management for semi-automated trading systems.
+
+---
 
