@@ -1,4 +1,4 @@
-# 🚀 Automated Trading & Risk Management Dashboard
+ Automated Trading & Risk Management Dashboard
 
 A full-stack trading analytics and control system designed to monitor signals, analyze positions, update risk settings, and visualize Profit & Loss — with **React.js (Frontend)** and **FastAPI (Backend)** integration.
 
@@ -6,22 +6,22 @@ This system is built to support real-time decision making for semi-automated or 
 
 ---
 
-## ✨ Features
+ Features
 
 | Feature | Description |
 |--------|-------------|
-| 🔐 **User Authentication** | Secure Login & Register with JWT |
-| 📊 **Dashboard Overview** | Unified access to all system modules |
-| 🚦 **Signal Management** | View, Approve, Reject trading signals |
-| 🧾 **Orders & Positions** | Track live and closed trades easily |
-| 📈 **PnL Visualization** | Real-time Profit & Loss chart with Recharts |
-| ⚙️ **Risk Control Module** | Update capital, risk %, max loss dynamically |
-| 🔍 **Backend Health Check** | System availability & API connectivity |
-| 🧩 **Modular Architecture** | Easy to maintain, extend and deploy |
+|  User Authentication | Secure Login & Register with JWT |
+|  Dashboard Overview | Unified access to all system modules |
+| Signal Management | View, Approve, Reject trading signals |
+| Orders & Positions | Track live and closed trades easily |
+| PnL Visualization | Real-time Profit & Loss chart with Recharts |
+| Risk Control Module | Update capital, risk %, max loss dynamically |
+| Backend Health Check | System availability & API connectivity |
+| Modular Architecture | Easy to maintain, extend and deploy |
 
 ---
 
-## 🏗 Technology Stack
+ Technology Stack
 
 | Layer | Technology |
 |------|------------|
@@ -33,7 +33,7 @@ This system is built to support real-time decision making for semi-automated or 
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 frontend/
 │
@@ -80,17 +80,17 @@ Copy code
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>/frontend
-2️⃣ Install Dependencies
+ Install Dependencies
 bash
 Copy code
 npm install
-3️⃣ Configure Environment Variables
+ Configure Environment Variables
 Create .env in the frontend folder:
 
 ini
@@ -98,7 +98,7 @@ Copy code
 REACT_APP_API_URL=http://127.0.0.1:8000
 Make sure backend is running at this URL.
 
-4️⃣ Start the Frontend
+ Start the Frontend
 bash
 Copy code
 npm start
@@ -107,7 +107,7 @@ The app runs on:
 arduino
 Copy code
 http://localhost:3000/
-🔗 Backend API Requirements
+ Backend API Requirements
 The frontend expects the backend to expose the following routes:
 
 Endpoint	Method	Description
@@ -124,7 +124,7 @@ Endpoint	Method	Description
 /risk/update	PUT	Update risk parameters
 /health/	GET	Check backend status
 
-🎨 UI Highlights
+ UI Highlights
 Animated Login & Register screens
 
 Collapsible Sidebar with smooth slide transition
@@ -135,15 +135,15 @@ Loading indicators during API calls
 
 Fully responsive layout
 
-🧪 Testing Summary
+ Testing Summary
 Test Case	Result
-Login with valid credentials	✅ Successful
-Invalid login	✅ Error shown
-Navigate without token	✅ Redirect to Login
-Update risk settings	✅ Updated successfully
-Load PnL Chart	✅ Smooth dynamic rendering
+Login with valid credentials	 Successful
+Invalid login	 Error shown
+Navigate without token	 Redirect to Login
+Update risk settings	 Updated successfully
+Load PnL Chart	Smooth dynamic rendering
 
-🚀 Future Enhancements
+ Future Enhancements
 WebSocket-based live updates
 
 Role-based admin dashboard
@@ -154,33 +154,11 @@ Automated trading strategy builder UI
 
 Dark/Light theme toggle
 
-🏁 Conclusion
+ Conclusion
 This project demonstrates a modern, scalable and interactive trading dashboard built with React + FastAPI, providing real-time monitoring, risk control, and analysis features suitable for both educational and production use.
 
-⭐ Show Your Support
-If you found this project useful, please star the repository 🌟
+ Show Your Support
+If you found this project useful, please star the repository 
 It helps others discover it and keeps the project growing!
 
-css
-Copy code
-⭐ gitHub → Click “Star” at the top right!
-👤 Author
-Your Name
-Frontend Developer
-📧 Email: [your email]
-🔗 Portfolio / LinkedIn (optional)
 
-yaml
-Copy code
-
----
-
-### ✅ Done.
-This README will **impress evaluators, interviewers, and developers** browsing your repo.
-
-If you want, I can now also:
-- Generate **Project Badges** (Build Passing, License, Tech Stack icons)
-- Generate **Screenshots section** with placeholders
-- Generate **Wiki / Documentation pages**
-  
-Just tell me 👉 *Do you want a clean README with screenshots next?*
