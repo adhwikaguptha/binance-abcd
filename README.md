@@ -41,6 +41,7 @@ An **end-to-end semi-automated trading ecosystem** combining multi-stage signal 
 │   └── README.md             # Backend setup guide
 │
 ├── strategy/                 # Core EMA-RSI and backtesting modules
+│   └── README.md             # Strategy setup guide
 │
 ├── requirements.txt
 ├── structure.txt
