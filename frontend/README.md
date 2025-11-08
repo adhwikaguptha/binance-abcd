@@ -1,70 +1,186 @@
-# Getting Started with Create React App
+# 🚀 Automated Trading & Risk Management Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack trading analytics and control system designed to monitor signals, analyze positions, update risk settings, and visualize Profit & Loss — with **React.js (Frontend)** and **FastAPI (Backend)** integration.
 
-## Available Scripts
+This system is built to support real-time decision making for semi-automated or automated trading strategies, with secure authentication, modular UI components, and clean API communication.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Feature | Description |
+|--------|-------------|
+| 🔐 **User Authentication** | Secure Login & Register with JWT |
+| 📊 **Dashboard Overview** | Unified access to all system modules |
+| 🚦 **Signal Management** | View, Approve, Reject trading signals |
+| 🧾 **Orders & Positions** | Track live and closed trades easily |
+| 📈 **PnL Visualization** | Real-time Profit & Loss chart with Recharts |
+| ⚙️ **Risk Control Module** | Update capital, risk %, max loss dynamically |
+| 🔍 **Backend Health Check** | System availability & API connectivity |
+| 🧩 **Modular Architecture** | Easy to maintain, extend and deploy |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🏗 Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Layer | Technology |
+|------|------------|
+| Frontend | **React.js**, React Router, Axios, Recharts, Context API |
+| Backend | **FastAPI**, Python, SQLAlchemy, Pydantic |
+| Database | PostgreSQL |
+| Auth | JWT (Bearer Token) |
+| Deployment (optional) | Docker / Render / Railway / Vercel |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📂 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+frontend/
+│
+├── .env # Contains REACT_APP_API_URL
+├── package.json
+├── public/
+│ └── index.html
+└── src/
+├── api/ # API Request Handlers
+│ ├── auth.js
+│ ├── signals.js
+│ ├── orders.js
+│ ├── positions.js
+│ ├── pnl.js
+│ ├── risk.js
+│ └── trade.js
+│
+├── context/
+│ └── AuthContext.js # Global Auth State (JWT)
+│
+├── components/
+│ ├── Sidebar.js
+│ ├── Header.js
+│ ├── ProtectedRoute.js
+│ ├── Toast.js
+│ └── LoadingSpinner.js
+│
+├── pages/
+│ ├── Login.js
+│ ├── Register.js
+│ ├── Dashboard.js
+│ ├── Signals.js
+│ ├── Orders.js
+│ ├── Positions.js
+│ ├── PnL.js
+│ ├── Risk.js
+│ ├── BinanceTest.js
+│ └── Health.js
+│
+└── App.js # Routes + Layout Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+yaml
+Copy code
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## ⚙️ Installation & Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>/frontend
+2️⃣ Install Dependencies
+bash
+Copy code
+npm install
+3️⃣ Configure Environment Variables
+Create .env in the frontend folder:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ini
+Copy code
+REACT_APP_API_URL=http://127.0.0.1:8000
+Make sure backend is running at this URL.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4️⃣ Start the Frontend
+bash
+Copy code
+npm start
+The app runs on:
 
-## Learn More
+arduino
+Copy code
+http://localhost:3000/
+🔗 Backend API Requirements
+The frontend expects the backend to expose the following routes:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Endpoint	Method	Description
+/auth/login	POST	Login and get token
+/auth/register	POST	Register account
+/signals	GET	Get all signals
+/signals/pending	GET	Get pending signals
+/signals/{id}/approve	POST	Approve signal
+/signals/{id}/reject	POST	Reject signal
+/orders	GET	Get orders
+/positions	GET	Get open positions
+/pnl/today	GET	PnL for current day
+/pnl/summary	GET	Overall performance summary
+/risk/update	PUT	Update risk parameters
+/health/	GET	Check backend status
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🎨 UI Highlights
+Animated Login & Register screens
 
-### Code Splitting
+Collapsible Sidebar with smooth slide transition
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Global Toast notification system for feedback
 
-### Analyzing the Bundle Size
+Loading indicators during API calls
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Fully responsive layout
 
-### Making a Progressive Web App
+🧪 Testing Summary
+Test Case	Result
+Login with valid credentials	✅ Successful
+Invalid login	✅ Error shown
+Navigate without token	✅ Redirect to Login
+Update risk settings	✅ Updated successfully
+Load PnL Chart	✅ Smooth dynamic rendering
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🚀 Future Enhancements
+WebSocket-based live updates
 
-### Advanced Configuration
+Role-based admin dashboard
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Trade execution directly from UI
 
-### Deployment
+Automated trading strategy builder UI
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Dark/Light theme toggle
 
-### `npm run build` fails to minify
+🏁 Conclusion
+This project demonstrates a modern, scalable and interactive trading dashboard built with React + FastAPI, providing real-time monitoring, risk control, and analysis features suitable for both educational and production use.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+⭐ Show Your Support
+If you found this project useful, please star the repository 🌟
+It helps others discover it and keeps the project growing!
+
+css
+Copy code
+⭐ gitHub → Click “Star” at the top right!
+👤 Author
+Your Name
+Frontend Developer
+📧 Email: [your email]
+🔗 Portfolio / LinkedIn (optional)
+
+yaml
+Copy code
+
+---
+
+### ✅ Done.
+This README will **impress evaluators, interviewers, and developers** browsing your repo.
+
+If you want, I can now also:
+- Generate **Project Badges** (Build Passing, License, Tech Stack icons)
+- Generate **Screenshots section** with placeholders
+- Generate **Wiki / Documentation pages**
+  
+Just tell me 👉 *Do you want a clean README with screenshots next?*
