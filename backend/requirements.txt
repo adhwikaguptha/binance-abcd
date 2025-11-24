@@ -42,7 +42,7 @@ pandas==2.3.2
 passlib==1.7.4
 propcache==0.3.2
 psutil==5.9.8
-psycopg2==2.9.10
+
 psycopg2-binary==2.9.9
 pyasn1==0.4.8
 pycares==4.11.0
@@ -71,5 +71,6 @@ websocket-client==1.8.0
 websockets==15.0.1
 yarl==1.20.1
 zipp==3.15.0
+
 
 
