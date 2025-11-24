@@ -1,22 +1,20 @@
-# run_stage4.py
 import os
 import pandas as pd
-from datetime import datetime, timezone
-import json
+from datetime import datetime
 import ccxt
 import requests
-import time
+
 from ema_rsi_stage2 import ema_rsi_strategy
+
 
 # -----------------------------
 # CONFIGURATION
 # -----------------------------
 SYMBOLS = ["BTC/USDT", "ETH/USDT", "BNB/USDT", "ADA/USDT", "XRP/USDT", "SOL/USDT"]
 TIMEFRAMES = ["5m", "15m", "1h", "12h"]
-TRADE_LOG = "live_signals_log.csv"
-BACKEND_URL = "http://127.0.0.1:8000/signals/update_active"
+BACKEND_URL = os.getenv("BACKEND_SIGNAL_UPDATE_URL")   # <-- FIXED (env variable)
 LIMIT_CANDLES = 300
-FETCH_INTERVAL = 3600  # 1 hour in seconds
+
 
 # -----------------------------
 # FETCH LIVE MARKET DATA
@@ -24,23 +22,26 @@ FETCH_INTERVAL = 3600  # 1 hour in seconds
 def fetch_live_data(symbol, timeframe):
     exchange = ccxt.binance()
     ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=LIMIT_CANDLES)
+
     df = pd.DataFrame(ohlcv, columns=["ts", "open", "high", "low", "close", "volume"])
     df["ts"] = pd.to_datetime(df["ts"], unit='ms')
     df[["open","high","low","close","volume"]] = df[["open","high","low","close","volume"]].astype(float)
     return df
 
+
 # -----------------------------
-# GENERATE SIGNALS
+# GENERATE SIGNALS FOR ONE RUN
 # -----------------------------
-def generate_signals(symbols, timeframes):
+def generate_signals_once():
+
     live_signals = []
 
-    for sym in symbols:
-        for tf in timeframes:
+    for sym in SYMBOLS:
+        for tf in TIMEFRAMES:
             try:
                 df = fetch_live_data(sym, tf)
             except Exception as e:
-                print(f"⚠️ Error fetching {sym} {tf}: {e}")
+                print(f"⚠ Error fetching {sym} {tf}: {e}")
                 continue
 
             sig = ema_rsi_strategy(df, len(df) - 1)
@@ -49,58 +50,54 @@ def generate_signals(symbols, timeframes):
 
             side, sl, tp = sig
             entry = float(df["close"].iloc[-1])
-            rr_ratio = round(abs(tp - entry) / max(1e-9, abs(entry - sl)), 2)
 
             signal = {
                 "symbol": sym,
+                "timeframe": tf,
                 "side": side.upper(),
                 "entry": round(entry, 6),
                 "sl": round(sl, 6),
                 "tp": round(tp, 6),
+                "timestamp": datetime.now().isoformat()
             }
+
             live_signals.append(signal)
-            print(f"[{sym} | {tf}] {side.upper()} → Entry={entry}, SL={sl}, TP={tp}, RR={rr_ratio}")
 
     return live_signals
 
-# -----------------------------
-# LOG & UPLOAD SIGNALS
-# -----------------------------
-def log_and_upload(signals):
-    if not signals:
-        print("⚠️ No signals generated this cycle.")
-        return
 
-    # Save locally
-    df = pd.DataFrame(signals)
-    if os.path.exists(TRADE_LOG):
-        df_existing = pd.read_csv(TRADE_LOG)
-        df = pd.concat([df_existing, df], ignore_index=True)
-    df.to_csv(TRADE_LOG, index=False)
-    print(f"💾 Saved {len(signals)} signals to {TRADE_LOG}")
+# -----------------------------
+# SEND SIGNALS TO BACKEND
+# -----------------------------
+def upload_to_backend(signals):
+    if not BACKEND_URL:
+        return {"status": "error", "message": "BACKEND_SIGNAL_UPDATE_URL not set"}
 
-    # Upload to backend
     try:
-        resp = requests.post(BACKEND_URL, json=signals, timeout=10)
+        resp = requests.post(BACKEND_URL, json=signals)
         resp.raise_for_status()
-        print(f"✅ Uploaded {len(signals)} signals to backend (HTTP {resp.status_code})")
+        return {"status": "uploaded", "count": len(signals)}
     except Exception as e:
-        print(f"⚠️ Error sending signals: {e}")
+        return {"status": "error", "message": str(e)}
+
 
 # -----------------------------
-# MAIN LOOP
+# MAIN FUNCTION (Manual Trigger)
 # -----------------------------
-def main():
-    print("🚀 Starting Stage 4 Signal Engine (runs every 1 hour)")
-    while True:
-        print("\n⏰ Running new signal generation cycle:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-        signals = generate_signals(SYMBOLS, TIMEFRAMES)
-        log_and_upload(signals)
-        print("✅ Cycle complete. Sleeping for 1 hour...\n")
-        time.sleep(FETCH_INTERVAL)
+def run_strategy_once():
+    print("\n🚀 Running strategy manually...")
 
-# -----------------------------
-# ENTRY POINT
-# -----------------------------
+    signals = generate_signals_once()
+
+    upload_result = upload_to_backend(signals)
+
+    return {
+        "generated_signals": len(signals),
+        "upload_status": upload_result,
+        "signals": signals
+    }
+
+
+# Safe entry point (for local use only)
 if __name__ == "__main__":
-    main()
+    print(run_strategy_once())
