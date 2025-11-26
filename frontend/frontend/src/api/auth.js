@@ -25,7 +25,7 @@ export const registerUser = async (username, email, password) => {
     `${BASE_URL}/auth/register`,
     {
       username: username,
-      email: email, // must be a valid email like "user@gmail.com"
+      email: email,
       password: password,
     },
     {
