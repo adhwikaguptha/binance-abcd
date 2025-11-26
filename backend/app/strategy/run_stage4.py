@@ -4,7 +4,7 @@ from datetime import datetime
 import ccxt
 import requests
 
-from app.ema_rsi_stage2 import ema_rsi_strategy
+from app.strategy.ema_rsi_stage2 import ema_rsi_strategy
 
 
 # -----------------------------
