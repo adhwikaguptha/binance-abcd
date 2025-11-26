@@ -20,7 +20,7 @@ from app.routes import (
 from app.logger import setup_logging
 
 # Manual strategy imports
-from strategy.run_stage4 import run_strategy_once   # <-- modify path as needed
+#from strategy.run_stage4 import run_strategy_once   # <-- modify path as needed
 
 # Load environment variables
 load_dotenv()
@@ -78,11 +78,11 @@ def root():
 # =====================================================
 # 🚀 MANUAL TRIGGER STRATEGY ENDPOINT
 # =====================================================
-@app.get("/run-strategy")
-def run_strategy():
-    """Runs trading strategy ONE TIME when called manually."""
-    try:
-        output = run_strategy_once()   # your function
-        return {"status": "success", "output": output}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+#@app.get("/run-strategy")
+#def run_strategy():
+ #   """Runs trading strategy ONE TIME when called manually."""
+  #  try:
+   #     output = run_strategy_once()   # your function
+    #    return {"status": "success", "output": output}
+    #except Exception as e:
+     #   return {"status": "error", "message": str(e)}
