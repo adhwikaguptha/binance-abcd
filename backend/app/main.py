@@ -5,9 +5,25 @@ from dotenv import load_dotenv
 
 from app.database import init_db
 
+# Load environment variables
+load_dotenv()
+
+# ------------------------------------
+# ✅ Create FastAPI app FIRST
+# ------------------------------------
+app = FastAPI(
+    title="Trading Bot Backend",
+    version="1.0",
+    description="Trading bot backend with manual trigger for strategies.",
+)
+
+# ------------------------------------
+# ✅ Startup event (MUST be after app)
+# ------------------------------------
 @app.on_event("startup")
 def on_startup():
     init_db()
+    print("🚀 Database initialized on startup")
 
 # Routers
 from app.routes import (
@@ -25,27 +41,10 @@ from app.routes import (
 # Logging
 from app.logger import setup_logging
 
-# Manual strategy imports
-#from strategy.run_stage4 import run_strategy_once   # <-- modify path as needed
-
-# Load environment variables
-load_dotenv()
-
-# FastAPI app
-app = FastAPI(
-    title="Trading Bot Backend",
-    version="1.0",
-    description="Trading bot backend with manual trigger for strategies.",
-)
-
 # CORS
-origins = [
-    "http://localhost:3000",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],    # Allow all for Railway + Vercel
+    allow_origins=["*"],  # allow Vercel + local
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,7 +69,6 @@ routers = [
 for r in routers:
     app.include_router(r.router)
 
-
 # Root endpoint
 @app.get("/")
 def root():
@@ -80,15 +78,11 @@ def root():
         "version": app.version,
     }
 
-
-# =====================================================
-# 🚀 MANUAL TRIGGER STRATEGY ENDPOINT
-# =====================================================
-#@app.get("/run-strategy")
-#def run_strategy():
- #   """Runs trading strategy ONE TIME when called manually."""
-  #  try:
-   #     output = run_strategy_once()   # your function
-    #    return {"status": "success", "output": output}
-    #except Exception as e:
-     #   return {"status": "error", "message": str(e)}
+# Manual trigger endpoint (disabled for now)
+# from strategy.run_stage4 import run_strategy_once
+# @app.get("/run-strategy")
+# def run_strategy():
+#     try:
+#         return {"status": "success", "output": run_strategy_once()}
+#     except Exception as e:
+#         return {"status": "error", "message": str(e)}
