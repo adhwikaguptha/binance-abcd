@@ -79,10 +79,10 @@ def root():
     }
 
 # Manual trigger endpoint (disabled for now)
-# from strategy.run_stage4 import run_strategy_once
-# @app.get("/run-strategy")
-# def run_strategy():
-#     try:
-#         return {"status": "success", "output": run_strategy_once()}
-#     except Exception as e:
-#         return {"status": "error", "message": str(e)}
+ from strategy.run_stage4 import run_strategy_once
+ @app.get("/run-strategy")
+ def run_strategy():
+     try:
+         return {"status": "success", "output": run_strategy_once()}
+     except Exception as e:
+         return {"status": "error", "message": str(e)}
