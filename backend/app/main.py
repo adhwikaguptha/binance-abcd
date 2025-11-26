@@ -79,7 +79,7 @@ def root():
     }
 
 # Manual trigger endpoint (disabled for now)
-from strategy.run_stage4 import run_strategy_once
+from app.strategy.run_stage4 import run_strategy_once
 @app.get("/run-strategy")
 def run_strategy():
     try:
