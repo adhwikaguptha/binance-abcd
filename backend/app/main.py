@@ -165,7 +165,4 @@ def run_strategy_once():
 
 
 # For local debugging: python -m app.strategy.run_stage4  OR  python run_stage4.py
-if _name_ == "_main_":
-    out = run_strategy_once()
-    print("\n=== LOCAL RUN COMPLETE ===")
-    print(out)
+
