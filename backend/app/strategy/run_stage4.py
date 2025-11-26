@@ -153,6 +153,4 @@ def run_strategy_once():
     return out
 
 
-# For manual CLI execution
-if __name__ == "__main__":
-    print(run_strategy_once())
+
