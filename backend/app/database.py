@@ -18,7 +18,12 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
+# 🔥 ADD THIS — auto create tables
+def init_db():
+    Base.metadata.create_all(bind=engine)
+
+# Convert Decimal before flush
 from sqlalchemy import event
 from decimal import Decimal
 
@@ -29,4 +34,3 @@ def convert_decimal_before_flush(session, flush_context, instances):
             value = getattr(instance, attr)
             if isinstance(value, Decimal):
                 setattr(instance, attr, float(value))
-
