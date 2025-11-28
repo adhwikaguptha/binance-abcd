@@ -160,6 +160,8 @@ def run_strategy_once():
 
     print("📊 Summary:", summary)
     return summary
+if __name__ == "__main__":
+    run_strategy_once()
 
 
 
