@@ -4,6 +4,11 @@ import pandas as pd
 import ccxt
 import requests
 
+import json
+
+BACKEND_SIGNAL_UPDATE_URL = os.getenv("BACKEND_SIGNAL_UPDATE_URL")
+
+
 # Try absolute import (when used inside FastAPI)
 try:
     from app.strategy.ema_rsi_stage2 import ema_rsi_strategy
