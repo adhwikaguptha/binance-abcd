@@ -1,0 +1,32 @@
+name: Run Trading Strategy Every Hour
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-strategy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install strategy dependencies
+        run: |
+          pip install -r strategy/requirements.txt
+
+      - name: Run strategy and send signals to backend
+        env:
+          BACKEND_SIGNAL_UPDATE_URL: ${{ secrets.BACKEND_SIGNAL_UPDATE_URL }}
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          BINANCE_API_SECRET: ${{ secrets.BINANCE_API_SECRET }}
+        run: |
+          cd strategy
+          python run_stage4.py
