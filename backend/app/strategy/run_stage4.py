@@ -162,7 +162,4 @@ def run_strategy_once():
     return summary
 
 
-# For local testing
-if __name__ == "__main__":
-    out = run_strategy_once()
-    print(out)
+
